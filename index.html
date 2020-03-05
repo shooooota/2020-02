@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+    
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <link rel="stylesheet" href="main.css">
+    <title>Vue.js </title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>チュートリアルtodoリスト</h1>
+
+        <label v-for="label in options">
+            <input type="radio"
+            v-model="current"
+            v-bind:value="label.value">{{ label.label }}
+        </label>
+
+        {{ computedTodos.length }}件表示中
+        <!-- 絞り込みラジオボタン -->
+        <!--　todoテーブル -->
+        <!-- 新規登録フォーム -->
+
+        <table>
+            <!-- テーブルのへっだ -->
+            <thead v-pre>
+                <tr>
+                    <th class="id">Id</th>
+                    <th class="content">コメント</th>
+                    <th class="state">状態</th>
+                    <th class="button">-</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <!-- [1] ここに <tr> で ToDo の要素を1行づつ繰り返し表示したい -->
+                <tr v-for="item in computedTodos" v-bind:key="item.id" v-bind:class="{done:item.state}">
+                    <!-- 要素の情報 -->
+                    <th>{{ item.id }}l</th>
+                    <td>{{ item.comment }}</td>
+                    <td class="state">
+                        <!-- 状態変更ぼたんのもっく -->
+                        <button v-on:click="doChangeState(item)">
+                            {{ labels[item.state] }}
+                        </button>
+                    </td>
+                    <td class="button">
+                        <button v-on:click.shift="doRemove(item)">
+                            削除
+                        </button>
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+        
+        <p>※削除ボタンはコントロールキーを押しながらクリックして下さい</p>
+
+
+        <h2>新しい作業の追加</h2>        
+        <form class="add-form" v-on:submit.prevent="doAdd">
+            コメント <input type="text" ref='comment'>
+            <button type="submit">追加</button>
+        </form>
+    </div>
+
+    <dic id="app"></dic>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
