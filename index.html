@@ -177,6 +177,24 @@
 
     </div>
 
+    <div id="app3">
+        <input v-model.number="budget"> 円以下に絞り込む
+        <input v-model.number="limit"> 件を表示
+        <p>{{ matched.length }} 件中 {{ limited.length }} 件を表示中</p>
+        <ul>
+            <!-- v-forでは最終結果、算出プロパティのlimitedを使用する -->
+            <li v-for="item in limited" v-bind:key="item.id">
+                {{ item.name }} {{ item.price }}円
+            </li>
+        </ul>
+    </div>
+    <div id="app4">
+
+        <label>
+            <input type="checkbox" v-model="val"> {{ val }}
+        </label>
+    </div>
+
 
 
     <script src=" https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"> </script>
