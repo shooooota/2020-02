@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-    
+
 <head>
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
@@ -10,13 +10,62 @@
 </head>
 
 <body>
+    <div id="wrap">
+        　<header class="pfix">
+            　　<nav class="nav" id="nav_f">
+                　　　<ul>
+                    　　　　<li><a href="#one" class="list">oneaaa</a></li>
+                    　　　　<li><a href="#two" class="list">two</a></li>
+                    　　　　<li><a href="#three" class="list">three</a></li>
+                    　　　　<li><a href="#four" class="list">four</a></li>
+                    　　　　<li><a href="#five" class="list">five</a></li>
+                    　　　</ul>
+                　　</nav>
+            　　<div id="target">
+                　　　<div class="target_inner">
+                    　　　　<span class="target_inner_line target_inner_1" id="line1"></span>
+                    　　　　<span class="target_inner_line target_inner_2" id="line2"></span>
+                    　　　　<span class="target_inner_line target_inner_3" id="line3"></span>
+                    　　　</div>
+                　　</div>
+            　</header>
+
+        　<main>
+            　　<section style="background: #efa2c2;">
+                　　　<h2 id="one">one</h2>
+                　　</section>
+            　　<section style="background: #7bd1e0;">
+                　　　<h2 id="two">two</h2>
+                　　</section>
+            　　<section style="background: #fc9967;">
+                　　　<h2 id="three">three</h2>
+                　　</section>
+            　　<section style="background: #5ecfad;">
+                　　　<h2 id="four">four</h2>
+                　　</section>
+            　　<section style="background: #fff6a1;">
+                　　　<h2 id="five">five</h2>
+                　　</section>
+            　</main>
+    </div>
+    <!-- <header class="site-header">
+        <h1 class="site-logo"><img src="images/logo.png" alt="WEBDESIGNDAY"></h1>
+        <nav class="gnav">
+            <ul class="gnav__menu">
+                <li class="gnav__menu__item"><a href="">About</a></li>
+                <li class="gnav__menu__item"><a href="">Works</a></li>
+                <li class="gnav__menu__item"><a href="">Recruit</a></li>
+                <li class="gnav__menu__item"><a href="">News</a></li>
+                <li class="gnav__menu__item"><a href="">Contact</a></li>
+            </ul>
+        </nav>
+    </header> -->
+
     <div id="app">
         <h1>チュートリアルtodoリスト</h1>
 
         <label v-for="label in options">
-            <input type="radio"
-            v-model="current"
-            v-bind:value="label.value">{{ label.label }}
+            <input type="radio" v-model="current" v-bind:value="label.value">{{ label.label }}
         </label>
 
         {{ computedTodos.length }}件表示中
@@ -52,23 +101,85 @@
                             削除
                         </button>
                     </td>
-                </tr>                
+                </tr>
             </tbody>
         </table>
-        
+
         <p>※削除ボタンはコントロールキーを押しながらクリックして下さい</p>
 
 
-        <h2>新しい作業の追加</h2>        
+        <h2>新しい作業の追加</h2>
         <form class="add-form" v-on:submit.prevent="doAdd">
             コメント <input type="text" ref='comment'>
             <button type="submit">追加</button>
         </form>
     </div>
 
-    <dic id="app"></dic>
+    <dic id="app">
+        <h1>koko</h1>
+    </dic>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+
+    <div id="app1">
+        <p><button v-on:click="show=!show">切り替え</button></p>
+        <transition>
+            <div v-show="show">
+                トランジションさせたい要素
+
+
+            </div>
+        </transition>
+    </div>
+
+    <div id="app2">
+        <label v-for="label in options">
+            <input type="radio" v-model="current" v-bind:value="label.value">{{ label.label }}
+        </label>
+        {{ computedTodos.length }} 件を表示中
+        <table>
+            <!-- テーブルヘッダー -->
+            <thead>
+                <tr>
+                    <th class="id">ID</th>
+                    <th class="comment">コメント</th>
+                    <th class="state">状態</th>
+                    <th class="button">-</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in computedTodos" v-bind:key="item.id">
+                    <th>{{ item.id }}</th>
+                    <td>{{ item.comment }}</td>
+                    <td class="state">
+                        <!-- 状態変更ボタンのモック -->
+                        <!-- <button>{{ item.state }}</button> -->
+                        <button v-on:click="doChangeState(item)">
+                            <!-- {{ item.state }} -->
+                            {{ labels[item.state] }}
+                        </button>
+                    </td>
+                    <td class="button">
+                        <!-- 削除ボタンのモック -->
+                        <button v-on:click.shift="doRemove(item)">削除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>新しい作業の追加</h2>
+        <form class="add-form" v-on:submit.prevent="doAdd">
+            <!-- コメント入力フォーム -->
+            コメント <input type="text" ref="comment">
+            <!-- 追加ボタンのモック -->
+            <button type="submit">追加</button>
+        </form>
+
+    </div>
+
+
+
+    <script src=" https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"> </script>
     <script src="main.js"></script>
 </body>
 
